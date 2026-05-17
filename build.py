@@ -53,15 +53,29 @@ shutil.copy(latest_file, "latest.html")
 print(f"Updated latest.html -> {latest_file.name}")
 
 #index.html 생성
-# html_files = sorted(
-#     ARCHIVE_DIR.glob("*.html"),
-#     reverse=True
-# )
+html_files = sorted(
+    ARCHIVE_DIR.glob("*.html"),
+    reverse=True
+)
 
-# links = "\n".join([
-#     f'<li><a href="/archive/{f.name}">{f.stem}</a></li>'
-#     for f in html_files
-# ])
+links = "\n".join([
+    f'- [{f.stem}](./archive/{f.name})'
+    for f in html_files
+])
+
+readme = f"""# 가정예배
+
+## ✨ 오늘의 예배
+- [바로가기](./latest.html)
+
+## 📚 지난 예배들
+{links}
+"""
+
+Path("README.md").write_text(
+    readme,
+    encoding="utf-8"
+)
 
 # index_html = f"""
 # <!DOCTYPE html>
