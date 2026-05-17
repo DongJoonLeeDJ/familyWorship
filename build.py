@@ -52,7 +52,7 @@ shutil.copy(latest_file, "latest.html")
 
 print(f"Updated latest.html -> {latest_file.name}")
 
-# index.html 생성
+#index.html 생성
 # html_files = sorted(
 #     ARCHIVE_DIR.glob("*.html"),
 #     reverse=True
@@ -72,7 +72,7 @@ print(f"Updated latest.html -> {latest_file.name}")
 
 #   <title>가정예배 아카이브</title>
 
-#   <link rel="stylesheet" href="/assets/style.css">
+#   <link rel="stylesheet" href="/familyWorship/assets/style.css">
 # </head>
 
 # <body>
