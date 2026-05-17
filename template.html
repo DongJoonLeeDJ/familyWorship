@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{{ title }}</title>
+
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+  <div class="sheet">
+
+    <h1>{{ title }}</h1>
+
+    <div class="subtitle">
+      {{ subtitle }}
+    </div>
+
+    <h2>1. 예배로의 부름</h2>
+
+    <p>
+      <span class="leader">인도자:</span>
+      오늘도 하나님 앞에 나아갑니다.
+    </p>
+
+    <p>
+      <span class="all">함께:</span>
+      하나님, 오늘도 우리 가정을 붙들어 주세요.
+    </p>
+
+    <h2>2. 말씀 읽기</h2>
+
+    <div class="verse">
+      <strong>{{ verse1_title }}</strong><br /><br />
+      {{ verse1 }}
+    </div>
+
+    <div class="verse">
+      <strong>{{ verse2_title }}</strong><br /><br />
+      {{ verse2 }}
+    </div>
+
+    <h2>3. 짧은 묵상</h2>
+
+    <div class="reflection">
+      {{ reflection }}
+    </div>
+
+    <h2>4. 함께 나누기</h2>
+
+    <ul>
+      {{ questions_html }}
+    </ul>
+
+    <h2>5. 함께 드리는 기도</h2>
+
+    <div class="prayer">
+      {{ prayer }}
+    </div>
+
+    <h2>6. 마무리 축복</h2>
+
+    <p>
+      {{ blessing }}
+    </p>
+
+    <div class="footer">
+      {{ footer }}
+    </div>
+
+  </div>
+</body>
+</html>
