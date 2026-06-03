@@ -413,3 +413,14 @@ a:hover {
 
     color:#92400e;
 }
+
+.nav-btn:disabled {
+
+    background:#d1d5db;
+
+    cursor:not-allowed;
+
+    opacity:0.7;
+
+    transform:none;
+}

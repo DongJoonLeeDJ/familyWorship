@@ -261,7 +261,7 @@ index_html = f"""
 
 <div class="nav-area">
 
-<button class="nav-btn"
+<button id="prevBtn" class="nav-btn"
         onclick="prevMonth()">
     ◀ 이전달
 </button>
@@ -275,7 +275,7 @@ index_html = f"""
      class="month-title">
 </div>
 
-<button class="nav-btn"
+<button id="nextBtn" class="nav-btn"
         onclick="nextMonth()">
     다음달 ▶
 </button>
@@ -320,6 +320,20 @@ let currentMonth = 6;
 const dates = Object.keys(worships);
 
 const latest = dates.sort().slice(-1)[0];
+
+const first = dates[0];
+
+const minYear =
+    parseInt(first.substring(0,4));
+
+const minMonth =
+    parseInt(first.substring(5,7));
+
+const maxYear =
+    parseInt(latest.substring(0,4));
+
+const maxMonth =
+    parseInt(latest.substring(5,7));
 
 currentYear = parseInt(latest.substring(0,4));
 currentMonth = parseInt(latest.substring(5,7));
@@ -385,7 +399,7 @@ function renderCalendar() {{
             row = document.createElement("tr");
         }}
     }}
-
+    updateNavButtons();
     body.appendChild(row);
 }}
 
@@ -418,6 +432,22 @@ function nextMonth() {{
 }}
 
 renderCalendar();
+function updateNavButtons() {{
+
+    const prevBtn =
+        document.getElementById("prevBtn");
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
+    prevBtn.disabled =
+        (currentYear === minYear &&
+         currentMonth === minMonth);
+
+    nextBtn.disabled =
+        (currentYear === maxYear &&
+         currentMonth === maxMonth);
+}}
 
 function buildYearButtons(){{
 
