@@ -17,7 +17,10 @@
     width:100%;
     border-collapse:collapse;
 }
+.calendar {
 
+    table-layout:fixed;
+}
 .calendar th,
 .calendar td {
     border:1px solid #ddd;
@@ -55,21 +58,6 @@
     text-align:center;
     font-size:1.3rem;
     font-weight:bold;
-}
-
-.month-btn {
-
-    margin:3px;
-
-    padding:6px 12px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#f0f0f0;
 }
 
 .year-buttons{
@@ -120,6 +108,9 @@
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
+<div id="yearButtons" class="year-buttons"></div>
+
+<div id="monthButtons" class="month-buttons"></div>
 <div class="nav-area">
 
 <button id="prevBtn" class="nav-btn"
@@ -128,9 +119,6 @@
 </button>
 
 
-<div id="yearButtons" class="year-buttons"></div>
-
-<div id="monthButtons" class="month-buttons"></div>
 
 <div id="monthTitle"
      class="month-title">
@@ -260,8 +248,8 @@ function renderCalendar() {
             row = document.createElement("tr");
         }
     }
-    updateNavButtons();
     body.appendChild(row);
+    updateNavButtons();
 }
 
 function prevMonth() {
@@ -292,7 +280,6 @@ function nextMonth() {
     renderCalendar();
 }
 
-renderCalendar();
 function updateNavButtons() {
 
     const prevBtn =
