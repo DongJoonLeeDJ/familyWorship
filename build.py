@@ -156,7 +156,10 @@ index_html = f"""
     width:100%;
     border-collapse:collapse;
 }}
+.calendar {{
 
+    table-layout:fixed;
+}}
 .calendar th,
 .calendar td {{
     border:1px solid #ddd;

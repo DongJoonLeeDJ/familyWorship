@@ -406,7 +406,6 @@ a:hover {
 
     font-weight:800;
 }
-
 .calendar td.latest a{
 
     background:#fef3c7;
@@ -423,4 +422,68 @@ a:hover {
     opacity:0.7;
 
     transform:none;
+}
+.month-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:20px;
+}
+
+@media (max-width:768px){
+
+    .nav-area{
+
+        flex-wrap:wrap;
+
+        gap:10px;
+    }
+
+    .month-title{
+
+        width:100%;
+
+        order:-1;
+
+        margin-bottom:8px;
+    }
+
+    .calendar th,
+    .calendar td{
+
+        padding:6px;
+
+        font-size:0.9rem;
+    }
+
+    .nav-btn{
+
+        padding:8px 12px;
+
+        font-size:0.9rem;
+    }
+
+    .month-btn{
+
+        padding:6px 10px;
+
+        font-size:0.85rem;
+    }
+
+    .year-btn{
+
+        padding:6px 12px;
+
+        font-size:0.85rem;
+    }
+    
+
+    .calendar td.has-worship a{
+
+        width:30px;
+
+        height:30px;
+    }
+    
 }
