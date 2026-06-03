@@ -1,3 +1,6 @@
+import calendar
+from datetime import datetime
+import json
 from pathlib import Path
 import shutil
 import yaml
@@ -53,27 +56,114 @@ shutil.copy(latest_file, "latest.html")
 print(f"Updated latest.html -> {latest_file.name}")
 
 # #index.html 생성
+# =========================
+# 달력용 데이터 생성
+# =========================
+
 html_files = sorted(
-    ARCHIVE_DIR.glob("*.html"),
-    reverse=True
+    ARCHIVE_DIR.glob("*.html")
 )
 
-archive_links = "\n".join([
-    f'<li><a href="./archive/{f.name}">{f.stem}</a></li>'
-    for f in html_files
-])
+worships = {}
+
+for f in html_files:
+    worships[f.stem] = f"./archive/{f.name}"
+
+# 날짜 -> 파일명 매핑
+date_map = {}
+
+for f in html_files:
+    try:
+        d = datetime.strptime(f.stem, "%Y-%m-%d")
+        date_map[d.date()] = f.name
+    except:
+        pass
+
+# 가장 최근 예배 기준 월
+latest_date = max(date_map.keys())
+
+year = latest_date.year
+month = latest_date.month
+
+cal = calendar.Calendar(firstweekday=6)  # 일요일 시작
+
+weeks = cal.monthdayscalendar(year, month)
+
+rows = []
+
+for week in weeks:
+
+    cells = []
+
+    for day in week:
+
+        if day == 0:
+            cells.append("<td></td>")
+            continue
+
+        current = datetime(year, month, day).date()
+
+        if current in date_map:
+
+            filename = date_map[current]
+
+            if current == latest_date:
+                cells.append(
+                    f'<td class="today">'
+                    f'<a href="./archive/{filename}">{day}</a>'
+                    f'</td>'
+                )
+            else:
+                cells.append(
+                    f'<td>'
+                    f'<a href="./archive/{filename}">{day}</a>'
+                    f'</td>'
+                )
+
+        else:
+            cells.append(f"<td>{day}</td>")
+
+    rows.append("<tr>" + "".join(cells) + "</tr>")
+
+calendar_html = "\n".join(rows)
+
+# =========================
+# index.html 생성
+# =========================
 
 index_html = f"""
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>가정예배</title>
 
 <link rel="stylesheet" href="./assets/style.css">
+
+<style>
+
+.calendar {{
+    width:100%;
+    border-collapse:collapse;
+}}
+
+.calendar th,
+.calendar td {{
+    border:1px solid #ddd;
+    text-align:center;
+    padding:10px;
+}}
+
+.calendar a {{
+    text-decoration:none;
+}}
+
+</style>
+
 </head>
 
 <body>
@@ -86,84 +176,141 @@ index_html = f"""
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
-<h2>📚 지난 예배들</h2>
+<h2 id="monthTitle"></h2>
 
-<ul>
-{archive_links}
-</ul>
+<button onclick="prevMonth()">◀ 이전달</button>
+<button onclick="nextMonth()">다음달 ▶</button>
+
+<table class="calendar">
+
+<thead>
+<tr>
+<th>일</th>
+<th>월</th>
+<th>화</th>
+<th>수</th>
+<th>목</th>
+<th>금</th>
+<th>토</th>
+</tr>
+</thead>
+
+<tbody id="calendarBody">
+</tbody>
+
+</table>
 
 </div>
 
+<script>
+
+const worships = {json.dumps(worships, ensure_ascii=False)};
+
+let currentYear = 2026;
+let currentMonth = 6;
+
+const dates = Object.keys(worships);
+
+const latest = dates.sort().slice(-1)[0];
+
+currentYear = parseInt(latest.substring(0,4));
+currentMonth = parseInt(latest.substring(5,7));
+
+function renderCalendar() {{
+
+    const body = document.getElementById("calendarBody");
+    const title = document.getElementById("monthTitle");
+
+    body.innerHTML = "";
+
+    title.textContent =
+        currentYear + "년 " + currentMonth + "월";
+
+    const firstDay =
+        new Date(currentYear,currentMonth-1,1);
+
+    const start =
+        firstDay.getDay();
+
+    const lastDate =
+        new Date(currentYear,currentMonth,0).getDate();
+
+    let row = document.createElement("tr");
+
+    for(let i=0;i<start;i++) {{
+        row.appendChild(document.createElement("td"));
+    }}
+
+    for(let day=1;day<=lastDate;day++) {{
+
+        const td =
+            document.createElement("td");
+
+        const key =
+            currentYear + "-" +
+            String(currentMonth).padStart(2,'0') + "-" +
+            String(day).padStart(2,'0');
+
+        if(worships[key]) {{
+
+            td.innerHTML =
+                '<a href="' +
+                worships[key] +
+                '">' +
+                day +
+                '</a>';
+
+        }}
+        else {{
+            td.textContent = day;
+        }}
+
+        row.appendChild(td);
+
+        if((start + day) % 7 === 0) {{
+            body.appendChild(row);
+            row = document.createElement("tr");
+        }}
+    }}
+
+    body.appendChild(row);
+}}
+
+function prevMonth() {{
+
+    currentMonth--;
+
+    if(currentMonth < 1) {{
+        currentMonth = 12;
+        currentYear--;
+    }}
+
+    renderCalendar();
+}}
+
+function nextMonth() {{
+
+    currentMonth++;
+
+    if(currentMonth > 12) {{
+        currentMonth = 1;
+        currentYear++;
+    }}
+
+    renderCalendar();
+}}
+
+renderCalendar();
+
+</script>
+
 </body>
+
 </html>
 """
-
 Path("index.html").write_text(
     index_html,
     encoding="utf-8"
 )
 
-print("Generated index.html")
-
-# html_files = sorted(
-#     ARCHIVE_DIR.glob("*.html"),
-#     reverse=True
-# )
-
-# links = "\n".join([
-#     f'- [{f.stem}](./archive/{f.name})'
-#     for f in html_files
-# ])
-
-# readme = f"""# 가정예배
-
-# ## ✨ 오늘의 예배
-# - [바로가기](./latest.html)
-
-# ## 📚 지난 예배들
-# {links}
-# """
-
-# Path("README.md").write_text(
-#     readme,
-#     encoding="utf-8"
-# )
-
-# index_html = f"""
-# <!DOCTYPE html>
-# <html lang="ko">
-# <head>
-#   <meta charset="UTF-8" />
-#   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-#   <title>가정예배 아카이브</title>
-
-#   <link rel="stylesheet" href="/familyWorship/assets/style.css">
-# </head>
-
-# <body>
-
-# <div class="sheet">
-
-#   <h1>가정예배 아카이브</h1>
-
-#   <p>
-#     <a href="/latest.html">✨ 최신 예배 바로가기</a>
-#   </p>
-
-#   <ul>
-#     {links}
-#   </ul>
-
-# </div>
-
-# </body>
-# </html>
-# """
-
-# Path("index.html").write_text(
-#     index_html,
-#     encoding="utf-8"
-# )
-
-# print("Generated index.html")
+print("Generated calendar index.html")

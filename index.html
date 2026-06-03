@@ -3,12 +3,34 @@
 <html lang="ko">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>가정예배</title>
 
 <link rel="stylesheet" href="./assets/style.css">
+
+<style>
+
+.calendar {
+    width:100%;
+    border-collapse:collapse;
+}
+
+.calendar th,
+.calendar td {
+    border:1px solid #ddd;
+    text-align:center;
+    padding:10px;
+}
+
+.calendar a {
+    text-decoration:none;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -21,30 +43,134 @@
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
-<h2>📚 지난 예배들</h2>
+<h2 id="monthTitle"></h2>
 
-<ul>
-<li><a href="./archive/2026-06-03.html">2026-06-03</a></li>
-<li><a href="./archive/2026-06-02.html">2026-06-02</a></li>
-<li><a href="./archive/2026-06-01.html">2026-06-01</a></li>
-<li><a href="./archive/2026-05-31.html">2026-05-31</a></li>
-<li><a href="./archive/2026-05-30.html">2026-05-30</a></li>
-<li><a href="./archive/2026-05-29.html">2026-05-29</a></li>
-<li><a href="./archive/2026-05-28.html">2026-05-28</a></li>
-<li><a href="./archive/2026-05-27.html">2026-05-27</a></li>
-<li><a href="./archive/2026-05-26.html">2026-05-26</a></li>
-<li><a href="./archive/2026-05-25.html">2026-05-25</a></li>
-<li><a href="./archive/2026-05-24.html">2026-05-24</a></li>
-<li><a href="./archive/2026-05-23.html">2026-05-23</a></li>
-<li><a href="./archive/2026-05-22.html">2026-05-22</a></li>
-<li><a href="./archive/2026-05-21.html">2026-05-21</a></li>
-<li><a href="./archive/2026-05-20.html">2026-05-20</a></li>
-<li><a href="./archive/2026-05-19.html">2026-05-19</a></li>
-<li><a href="./archive/2026-05-18.html">2026-05-18</a></li>
-<li><a href="./archive/2026-05-17.html">2026-05-17</a></li>
-</ul>
+<button onclick="prevMonth()">◀ 이전달</button>
+<button onclick="nextMonth()">다음달 ▶</button>
+
+<table class="calendar">
+
+<thead>
+<tr>
+<th>일</th>
+<th>월</th>
+<th>화</th>
+<th>수</th>
+<th>목</th>
+<th>금</th>
+<th>토</th>
+</tr>
+</thead>
+
+<tbody id="calendarBody">
+</tbody>
+
+</table>
 
 </div>
 
+<script>
+
+const worships = {"2026-05-17": "./archive/2026-05-17.html", "2026-05-18": "./archive/2026-05-18.html", "2026-05-19": "./archive/2026-05-19.html", "2026-05-20": "./archive/2026-05-20.html", "2026-05-21": "./archive/2026-05-21.html", "2026-05-22": "./archive/2026-05-22.html", "2026-05-23": "./archive/2026-05-23.html", "2026-05-24": "./archive/2026-05-24.html", "2026-05-25": "./archive/2026-05-25.html", "2026-05-26": "./archive/2026-05-26.html", "2026-05-27": "./archive/2026-05-27.html", "2026-05-28": "./archive/2026-05-28.html", "2026-05-29": "./archive/2026-05-29.html", "2026-05-30": "./archive/2026-05-30.html", "2026-05-31": "./archive/2026-05-31.html", "2026-06-01": "./archive/2026-06-01.html", "2026-06-02": "./archive/2026-06-02.html", "2026-06-03": "./archive/2026-06-03.html"};
+
+let currentYear = 2026;
+let currentMonth = 6;
+
+const dates = Object.keys(worships);
+
+const latest = dates.sort().slice(-1)[0];
+
+currentYear = parseInt(latest.substring(0,4));
+currentMonth = parseInt(latest.substring(5,7));
+
+function renderCalendar() {
+
+    const body = document.getElementById("calendarBody");
+    const title = document.getElementById("monthTitle");
+
+    body.innerHTML = "";
+
+    title.textContent =
+        currentYear + "년 " + currentMonth + "월";
+
+    const firstDay =
+        new Date(currentYear,currentMonth-1,1);
+
+    const start =
+        firstDay.getDay();
+
+    const lastDate =
+        new Date(currentYear,currentMonth,0).getDate();
+
+    let row = document.createElement("tr");
+
+    for(let i=0;i<start;i++) {
+        row.appendChild(document.createElement("td"));
+    }
+
+    for(let day=1;day<=lastDate;day++) {
+
+        const td =
+            document.createElement("td");
+
+        const key =
+            currentYear + "-" +
+            String(currentMonth).padStart(2,'0') + "-" +
+            String(day).padStart(2,'0');
+
+        if(worships[key]) {
+
+            td.innerHTML =
+                '<a href="' +
+                worships[key] +
+                '">' +
+                day +
+                '</a>';
+
+        }
+        else {
+            td.textContent = day;
+        }
+
+        row.appendChild(td);
+
+        if((start + day) % 7 === 0) {
+            body.appendChild(row);
+            row = document.createElement("tr");
+        }
+    }
+
+    body.appendChild(row);
+}
+
+function prevMonth() {
+
+    currentMonth--;
+
+    if(currentMonth < 1) {
+        currentMonth = 12;
+        currentYear--;
+    }
+
+    renderCalendar();
+}
+
+function nextMonth() {
+
+    currentMonth++;
+
+    if(currentMonth > 12) {
+        currentMonth = 1;
+        currentYear++;
+    }
+
+    renderCalendar();
+}
+
+renderCalendar();
+
+</script>
+
 </body>
+
 </html>
