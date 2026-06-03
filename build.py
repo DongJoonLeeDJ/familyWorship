@@ -52,30 +52,82 @@ shutil.copy(latest_file, "latest.html")
 
 print(f"Updated latest.html -> {latest_file.name}")
 
-#index.html 생성
+# #index.html 생성
 html_files = sorted(
     ARCHIVE_DIR.glob("*.html"),
     reverse=True
 )
 
-links = "\n".join([
-    f'- [{f.stem}](./archive/{f.name})'
+archive_links = "\n".join([
+    f'<li><a href="./archive/{f.name}">{f.stem}</a></li>'
     for f in html_files
 ])
 
-readme = f"""# 가정예배
+index_html = f"""
+<!DOCTYPE html>
+<html lang="ko">
 
-## ✨ 오늘의 예배
-- [바로가기](./latest.html)
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-## 📚 지난 예배들
-{links}
+<title>가정예배</title>
+
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+
+<div class="sheet">
+
+<h1>가정예배</h1>
+
+<p>
+<a href="./latest.html">✨ 오늘의 예배</a>
+</p>
+
+<h2>📚 지난 예배들</h2>
+
+<ul>
+{archive_links}
+</ul>
+
+</div>
+
+</body>
+</html>
 """
 
-Path("README.md").write_text(
-    readme,
+Path("index.html").write_text(
+    index_html,
     encoding="utf-8"
 )
+
+print("Generated index.html")
+
+# html_files = sorted(
+#     ARCHIVE_DIR.glob("*.html"),
+#     reverse=True
+# )
+
+# links = "\n".join([
+#     f'- [{f.stem}](./archive/{f.name})'
+#     for f in html_files
+# ])
+
+# readme = f"""# 가정예배
+
+# ## ✨ 오늘의 예배
+# - [바로가기](./latest.html)
+
+# ## 📚 지난 예배들
+# {links}
+# """
+
+# Path("README.md").write_text(
+#     readme,
+#     encoding="utf-8"
+# )
 
 # index_html = f"""
 # <!DOCTYPE html>
