@@ -69,6 +69,12 @@ worships = {}
 for f in html_files:
     worships[f.stem] = f"./archive/{f.name}"
 
+years = sorted({
+    date[:4]
+    for date in worships.keys()
+})
+
+
 # 날짜 -> 파일명 매핑
 date_map = {}
 
@@ -158,8 +164,85 @@ index_html = f"""
     padding:10px;
 }}
 
-.calendar a {{
-    text-decoration:none;
+.nav-area {{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:16px;
+    margin:20px 0;
+}}
+
+.nav-btn {{
+    background:#4f7cff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 18px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:0.2s;
+}}
+
+.nav-btn:hover {{
+    transform:translateY(-1px);
+    opacity:0.9;
+}}
+
+.month-title {{
+    min-width:180px;
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:bold;
+}}
+
+.month-btn {{
+
+    margin:3px;
+
+    padding:6px 12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#f0f0f0;
+}}
+
+.year-buttons{{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}}
+
+.year-btn{{
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:8px 16px;
+
+    cursor:pointer;
+
+    background:#eceff4;
+
+    font-weight:600;
+
+    transition:0.2s;
+}}
+
+.year-btn:hover{{
+    transform:translateY(-1px);
+}}
+
+.year-btn.active{{
+    background:#4f7cff;
+    color:white;
 }}
 
 </style>
@@ -176,10 +259,28 @@ index_html = f"""
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
-<h2 id="monthTitle"></h2>
+<div class="nav-area">
 
-<button onclick="prevMonth()">◀ 이전달</button>
-<button onclick="nextMonth()">다음달 ▶</button>
+<button class="nav-btn"
+        onclick="prevMonth()">
+    ◀ 이전달
+</button>
+
+
+<div id="yearButtons" class="year-buttons"></div>
+
+<div id="monthButtons" class="month-buttons"></div>
+
+<div id="monthTitle"
+     class="month-title">
+</div>
+
+<button class="nav-btn"
+        onclick="nextMonth()">
+    다음달 ▶
+</button>
+
+</div>
 
 <table class="calendar">
 
@@ -205,6 +306,13 @@ index_html = f"""
 <script>
 
 const worships = {json.dumps(worships, ensure_ascii=False)};
+
+const years =
+    Object.keys(worships)
+    .map(x => x.substring(0,4));
+
+const uniqueYears =
+    [...new Set(years)].sort();
 
 let currentYear = 2026;
 let currentMonth = 6;
@@ -252,14 +360,19 @@ function renderCalendar() {{
             String(day).padStart(2,'0');
 
         if(worships[key]) {{
-
+        
+            td.classList.add("has-worship");
+        
+            if(key === latest){{
+                td.classList.add("latest");
+            }}
+        
             td.innerHTML =
                 '<a href="' +
                 worships[key] +
                 '">' +
                 day +
                 '</a>';
-
         }}
         else {{
             td.textContent = day;
@@ -285,6 +398,8 @@ function prevMonth() {{
         currentYear--;
     }}
 
+    buildYearButtons();
+    buildMonthButtons();
     renderCalendar();
 }}
 
@@ -297,9 +412,83 @@ function nextMonth() {{
         currentYear++;
     }}
 
+    buildYearButtons();
+    buildMonthButtons();
     renderCalendar();
 }}
 
+renderCalendar();
+
+function buildYearButtons(){{
+
+    const area =
+        document.getElementById("yearButtons");
+
+    area.innerHTML = "";
+
+    uniqueYears.forEach(year=>{{
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "year-btn";
+
+        if(parseInt(year) === currentYear){{
+            btn.classList.add("active");
+        }}
+
+        btn.textContent = year;
+
+        btn.onclick = ()=>{{
+
+            currentYear =
+                parseInt(year);
+
+            buildYearButtons();
+            buildMonthButtons();
+            renderCalendar();
+        }};
+
+        area.appendChild(btn);
+    }});
+}}
+
+function buildMonthButtons() {{
+
+    const area =
+        document.getElementById("monthButtons");
+
+    area.innerHTML = "";
+
+    for(let m=1;m<=12;m++) {{
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "month-btn";
+
+        if(m === currentMonth){{
+            btn.classList.add("active");
+        }}
+
+        btn.textContent =
+            String(m).padStart(2,'0');
+
+        btn.onclick = ()=>{{
+
+            currentMonth = m;
+
+            buildMonthButtons();
+
+            renderCalendar();
+        }};
+
+        area.appendChild(btn);
+    }}
+}}
+
+buildYearButtons();
+buildMonthButtons();
 renderCalendar();
 
 </script>

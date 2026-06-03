@@ -347,3 +347,69 @@ a:hover {
     padding: 20px;
   }
 }
+.month-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:24px;
+}
+
+.month-btn{
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:8px 14px;
+
+    cursor:pointer;
+
+    background:#eceff4;
+
+    font-weight:600;
+
+    transition:0.2s;
+}
+
+.month-btn:hover{
+    transform:translateY(-1px);
+}
+
+.month-btn.active{
+    background:#7c3aed;
+    color:white;
+}
+
+.calendar td{
+    height:70px;
+    vertical-align:middle;
+}
+
+.calendar td.has-worship a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    font-weight:800;
+}
+
+.calendar td.latest a{
+
+    background:#fef3c7;
+
+    color:#92400e;
+}

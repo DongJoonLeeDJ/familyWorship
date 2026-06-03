@@ -29,6 +29,87 @@
     text-decoration:none;
 }
 
+.nav-area {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:16px;
+    margin:20px 0;
+}
+
+.nav-btn {
+    background:#4f7cff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 18px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:0.2s;
+}
+
+.nav-btn:hover {
+    transform:translateY(-1px);
+    opacity:0.9;
+}
+
+.month-title {
+    min-width:180px;
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.month-btn {
+
+    margin:3px;
+
+    padding:6px 12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#f0f0f0;
+}
+
+.year-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.year-btn{
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:8px 16px;
+
+    cursor:pointer;
+
+    background:#eceff4;
+
+    font-weight:600;
+
+    transition:0.2s;
+}
+
+.year-btn:hover{
+    transform:translateY(-1px);
+}
+
+.year-btn.active{
+    background:#4f7cff;
+    color:white;
+}
+
 </style>
 
 </head>
@@ -43,10 +124,28 @@
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
-<h2 id="monthTitle"></h2>
+<div class="nav-area">
 
-<button onclick="prevMonth()">◀ 이전달</button>
-<button onclick="nextMonth()">다음달 ▶</button>
+<button class="nav-btn"
+        onclick="prevMonth()">
+    ◀ 이전달
+</button>
+
+
+<div id="yearButtons" class="year-buttons"></div>
+
+<div id="monthButtons" class="month-buttons"></div>
+
+<div id="monthTitle"
+     class="month-title">
+</div>
+
+<button class="nav-btn"
+        onclick="nextMonth()">
+    다음달 ▶
+</button>
+
+</div>
 
 <table class="calendar">
 
@@ -72,6 +171,13 @@
 <script>
 
 const worships = {"2026-05-17": "./archive/2026-05-17.html", "2026-05-18": "./archive/2026-05-18.html", "2026-05-19": "./archive/2026-05-19.html", "2026-05-20": "./archive/2026-05-20.html", "2026-05-21": "./archive/2026-05-21.html", "2026-05-22": "./archive/2026-05-22.html", "2026-05-23": "./archive/2026-05-23.html", "2026-05-24": "./archive/2026-05-24.html", "2026-05-25": "./archive/2026-05-25.html", "2026-05-26": "./archive/2026-05-26.html", "2026-05-27": "./archive/2026-05-27.html", "2026-05-28": "./archive/2026-05-28.html", "2026-05-29": "./archive/2026-05-29.html", "2026-05-30": "./archive/2026-05-30.html", "2026-05-31": "./archive/2026-05-31.html", "2026-06-01": "./archive/2026-06-01.html", "2026-06-02": "./archive/2026-06-02.html", "2026-06-03": "./archive/2026-06-03.html"};
+
+const years =
+    Object.keys(worships)
+    .map(x => x.substring(0,4));
+
+const uniqueYears =
+    [...new Set(years)].sort();
 
 let currentYear = 2026;
 let currentMonth = 6;
@@ -119,14 +225,19 @@ function renderCalendar() {
             String(day).padStart(2,'0');
 
         if(worships[key]) {
-
+        
+            td.classList.add("has-worship");
+        
+            if(key === latest){
+                td.classList.add("latest");
+            }
+        
             td.innerHTML =
                 '<a href="' +
                 worships[key] +
                 '">' +
                 day +
                 '</a>';
-
         }
         else {
             td.textContent = day;
@@ -152,6 +263,8 @@ function prevMonth() {
         currentYear--;
     }
 
+    buildYearButtons();
+    buildMonthButtons();
     renderCalendar();
 }
 
@@ -164,9 +277,93 @@ function nextMonth() {
         currentYear++;
     }
 
+    buildYearButtons();
+    buildMonthButtons();
     renderCalendar();
 }
 
+renderCalendar();
+
+function buildYearButtons(){
+
+    const area =
+        document.getElementById("yearButtons");
+
+    area.innerHTML = "";
+
+    uniqueYears.forEach(year=>{
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "year-btn";
+
+        if(parseInt(year) === currentYear){
+            btn.classList.add("active");
+        }
+
+        btn.textContent = year;
+
+        btn.onclick = ()=>{
+
+            currentYear =
+                parseInt(year);
+
+            buildYearButtons();
+            buildMonthButtons();
+            renderCalendar();
+        };
+
+        area.appendChild(btn);
+    });
+}
+
+function buildMonthButtons() {
+
+    const area =
+        document.getElementById("monthButtons");
+
+    area.innerHTML = "";
+
+    for(let m=1;m<=12;m++) {
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "month-btn";
+
+        if(m === currentMonth){
+            btn.classList.add("active");
+        }
+
+        btn.textContent =
+            String(m).padStart(2,'0');
+
+        btn.onclick = ()=>{
+
+            currentMonth = m;
+
+            buildMonthButtons();
+
+            renderCalendar();
+        };
+
+        area.appendChild(btn);
+    }
+}
+
+function changeYear() {
+
+    currentYear =
+        parseInt(
+            document.getElementById("yearSelect").value
+        );
+
+    renderCalendar();
+}
+
+buildYearButtons();
+buildMonthButtons();
 renderCalendar();
 
 </script>
