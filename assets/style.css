@@ -347,13 +347,6 @@ a:hover {
     padding: 20px;
   }
 }
-.month-buttons{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-bottom:24px;
-}
 
 .month-btn{
 
@@ -370,6 +363,22 @@ a:hover {
     font-weight:600;
 
     transition:0.2s;
+
+
+    
+    /* margin:3px;
+
+    padding:6px 12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer; */
+
+    background:#f0f0f0;
+
+
 }
 
 .month-btn:hover{
@@ -485,5 +494,5 @@ a:hover {
 
         height:30px;
     }
-    
+
 }

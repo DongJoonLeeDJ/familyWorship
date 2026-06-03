@@ -69,12 +69,6 @@ worships = {}
 for f in html_files:
     worships[f.stem] = f"./archive/{f.name}"
 
-years = sorted({
-    date[:4]
-    for date in worships.keys()
-})
-
-
 # 날짜 -> 파일명 매핑
 date_map = {}
 
@@ -88,50 +82,7 @@ for f in html_files:
 # 가장 최근 예배 기준 월
 latest_date = max(date_map.keys())
 
-year = latest_date.year
-month = latest_date.month
 
-cal = calendar.Calendar(firstweekday=6)  # 일요일 시작
-
-weeks = cal.monthdayscalendar(year, month)
-
-rows = []
-
-for week in weeks:
-
-    cells = []
-
-    for day in week:
-
-        if day == 0:
-            cells.append("<td></td>")
-            continue
-
-        current = datetime(year, month, day).date()
-
-        if current in date_map:
-
-            filename = date_map[current]
-
-            if current == latest_date:
-                cells.append(
-                    f'<td class="today">'
-                    f'<a href="./archive/{filename}">{day}</a>'
-                    f'</td>'
-                )
-            else:
-                cells.append(
-                    f'<td>'
-                    f'<a href="./archive/{filename}">{day}</a>'
-                    f'</td>'
-                )
-
-        else:
-            cells.append(f"<td>{day}</td>")
-
-    rows.append("<tr>" + "".join(cells) + "</tr>")
-
-calendar_html = "\n".join(rows)
 
 # =========================
 # index.html 생성
@@ -199,21 +150,6 @@ index_html = f"""
     font-weight:bold;
 }}
 
-.month-btn {{
-
-    margin:3px;
-
-    padding:6px 12px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#f0f0f0;
-}}
-
 .year-buttons{{
     display:flex;
     justify-content:center;
@@ -262,6 +198,9 @@ index_html = f"""
 <a href="./latest.html">✨ 오늘의 예배</a>
 </p>
 
+<div id="yearButtons" class="year-buttons"></div>
+
+<div id="monthButtons" class="month-buttons"></div>
 <div class="nav-area">
 
 <button id="prevBtn" class="nav-btn"
@@ -270,9 +209,6 @@ index_html = f"""
 </button>
 
 
-<div id="yearButtons" class="year-buttons"></div>
-
-<div id="monthButtons" class="month-buttons"></div>
 
 <div id="monthTitle"
      class="month-title">
@@ -402,8 +338,8 @@ function renderCalendar() {{
             row = document.createElement("tr");
         }}
     }}
-    updateNavButtons();
     body.appendChild(row);
+    updateNavButtons();
 }}
 
 function prevMonth() {{
@@ -434,7 +370,6 @@ function nextMonth() {{
     renderCalendar();
 }}
 
-renderCalendar();
 function updateNavButtons() {{
 
     const prevBtn =
