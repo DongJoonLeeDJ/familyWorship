@@ -85,7 +85,7 @@ latest_date = max(date_map.keys())
 
 
 # =========================
-# index.html 생성
+# index.html  생성
 # =========================
 
 index_html = f"""
