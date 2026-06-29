@@ -83,7 +83,6 @@ for f in html_files:
 latest_date = max(date_map.keys())
 
 
- 
 # =========================
 # index.html  생성
 # =========================
