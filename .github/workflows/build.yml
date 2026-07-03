@@ -37,7 +37,7 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          git add archive latest.html index.html
+          git add .
 
           if git diff --cached --quiet; then
             echo "No changes"
