@@ -496,3 +496,11 @@ a:hover {
     }
 
 }
+
+.reflection,
+.questions,
+.prayer,
+.calling,
+.verse {
+    white-space: pre-line;
+}

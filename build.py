@@ -35,7 +35,7 @@ for key, value in data.items():
     html = html.replace(placeholder, str(value))
 
 # 줄바꿈 처리
-html = html.replace("\n", "<br />")
+#html = html.replace("\n", "<br />")
 
 # 출력 파일명
 output_name = str(data['date']) + ".html"
