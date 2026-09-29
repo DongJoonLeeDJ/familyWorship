@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>감자 이름 후보 · 이루 vs 이루야</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700;800&display=swap');
+:root{--bg:#f6f5f1;--paper:#fff;--ink:#262626;--muted:#747474;--line:#e8e5de;--sage:#4d6b62;--sagebg:#e8f0ed;--gold:#a88146;--goldbg:#f7f0e4;--rose:#946b73;--shadow:0 14px 38px rgba(30,30,30,.07)}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:radial-gradient(circle at 15% 0,rgba(168,129,70,.08),transparent 28%),radial-gradient(circle at 100% 12%,rgba(77,107,98,.08),transparent 26%),var(--bg);color:var(--ink);font-family:Roboto,"Noto Sans KR",Arial,sans-serif;line-height:1.72;letter-spacing:-.02em}.wrap{width:min(1040px,calc(100% - 36px));margin:auto}
+.hero{padding:72px 0 38px;text-align:center}.eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--sagebg);color:var(--sage);font-size:12px;font-weight:800}.hero h1{margin:18px 0 12px;font-size:clamp(36px,5.5vw,60px);line-height:1.1;letter-spacing:-.06em}.hero p{max-width:760px;margin:0 auto;color:#5e5e5e}.hero .meta{margin-top:14px;font-size:14px;color:var(--muted)}
+.nav{position:sticky;top:0;z-index:10;background:rgba(246,245,241,.84);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,229,222,.9)}.navin{display:flex;gap:7px;overflow:auto;padding:10px 0}.nav a{white-space:nowrap;text-decoration:none;color:#646464;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px}.nav a:hover{background:#fff;color:var(--ink)}
+section{padding:42px 0}.eyebrow2{color:var(--sage);font-size:12px;font-weight:800;letter-spacing:.12em}.head h2{margin:5px 0 7px;font-size:28px;line-height:1.25;letter-spacing:-.04em}.head p{margin:0;color:var(--muted);font-size:15px}
+.grid{display:grid;gap:16px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:800px){.two,.three{grid-template-columns:1fr}.hero{padding-top:52px}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:24px}.namecard{min-height:290px;position:relative;overflow:hidden}.namecard:after{content:"";position:absolute;width:145px;height:145px;border-radius:50%;right:-52px;top:-52px;background:var(--sagebg)}.namecard.alt:after{background:var(--goldbg)}.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#f1efe9;color:#686868;font-size:11px;font-weight:800}.name{margin:14px 0 2px;font-size:36px;font-weight:800;letter-spacing:-.055em}.name-sub{margin:0 0 16px;color:var(--muted);font-size:13px;font-weight:600}.note{padding:15px 16px;background:#faf9f6;border-radius:14px;color:#4c4c4c;font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}.chip{padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:#666;background:#fff;font-size:11px;font-weight:700}.chip.key{background:var(--sagebg);border-color:#d9e6e1;color:var(--sage)}.chip.gold{background:var(--goldbg);border-color:#eadfc9;color:#8a6a32}
+.quote{margin-top:16px;padding:20px;border:1px solid #d9e6e1;border-radius:18px;background:linear-gradient(135deg,var(--sagebg),#fff);font-size:17px}.quote strong{font-weight:800}.callout{margin-top:16px;padding:14px 16px;border-left:4px solid var(--gold);border-radius:0 14px 14px 0;background:var(--goldbg);font-size:14px}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:18px;background:#fff}.tablewrap table{width:100%;border-collapse:collapse;min-width:680px}th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}th{background:#faf9f6;color:#666;font-weight:800}tr:last-child td{border-bottom:0}
+.hanja{font-family:"Noto Serif KR","Batang",serif;font-size:44px;line-height:1}.hcard{min-height:225px}.hrow{display:flex;gap:14px;align-items:flex-start}.hcard h3{margin:0;font-size:18px}.sub{color:var(--sage);font-size:12px;font-weight:800}.hcard p{margin:14px 0 0;color:#525252;font-size:13px}.muted{color:var(--muted)}
+.combo{padding:18px 0;border-top:1px solid var(--line)}.combo:first-child{border-top:0;padding-top:0}.combo strong{font-size:16px}.combo .cname{font-family:"Noto Serif KR","Batang",serif;font-size:25px;font-weight:700;margin-right:8px}.combo small{color:var(--muted)}
+details{background:#fff;border:1px solid var(--line);border-radius:15px;padding:0 16px}details+details{margin-top:9px}summary{cursor:pointer;list-style:none;padding:15px 0;font-weight:800}summary::-webkit-details-marker{display:none}summary:after{content:'＋';float:right;color:#999}details[open] summary:after{content:'−'}.db{padding:0 0 16px;color:#555;font-size:13px}
+footer{padding:46px 0 70px;color:#7b7b7b;font-size:12px}.source{border-top:1px solid var(--line);padding-top:16px}.source a{color:var(--sage);font-weight:800;text-decoration:none}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <div class="eyebrow">감자 이름 후보 정리 · 2026.09.29</div>
+  <h1>이루 <span style="font-weight:500;color:#aaa">vs.</span> 이루야</h1>
+  <p>“할렐루야”에서 시작한 <strong>루야</strong>를 이름에 어떻게 담을지, 그리고 한자는 어떤 의미로 붙일지 함께 비교하는 정리본.</p>
+  <div class="meta"><strong>성:</strong> 이 · <strong>이름 후보:</strong> 루 / 루야 · <strong>전체 이름:</strong> 이루 / 이루야</div>
+</header>
+<nav class="nav"><div class="wrap navin"><a href="#name">이루 vs 이루야</a><a href="#call">실제로 부르면</a><a href="#lu">‘루’ 한자</a><a href="#ya">‘야’ 한자</a><a href="#combo">조합</a><a href="#think">고르는 기준</a></div></nav>
+<main class="wrap">
+<section id="name"><div class="head"><div class="eyebrow2">01 · 이름 자체</div><h2>이루와 이루야는 매력이 서로 다르다</h2><p>어느 쪽을 고를지보다, 이름에 무엇을 가장 깊게 남기고 싶은지 생각해 보는 파트.</p></div><div class="grid two" style="margin-top:20px">
+<article class="card namecard"><span class="tag">성 이 + 이름 루</span><h3 class="name">이루</h3><p class="name-sub">두 음절 · 깔끔하고 단정한 인상</p><p class="note"><strong>“이루다”</strong>와 자연스럽게 연결된다. “자기 삶을 아름답게 이루어 가는 사람”이라는 의미를 담기 좋고, 동시에 ‘루’가 <strong>할렐루야</strong>에서 왔다는 가족만의 이야기도 남는다.</p><div class="chips"><span class="chip key">간결함</span><span class="chip">성인이 되어도 자연스러움</span><span class="chip gold">‘이루다’와 연결</span></div></article>
+<article class="card namecard alt"><span class="tag">성 이 + 이름 루야</span><h3 class="name">이루야</h3><p class="name-sub">세 음절 · ‘할렐루야’의 유래가 더 선명함</p><p class="note"><strong>“할렐루야 → 루야”</strong>가 이름 자체에 들어간다. 이름만 들어도 부모가 왜 이 이름을 지었는지 이야기가 생긴다는 것이 가장 큰 특징.</p><div class="chips"><span class="chip gold">신앙적 유래가 직접적</span><span class="chip">독특함</span><span class="chip">이름의 스토리가 분명함</span></div></article>
+</div></section>
+
+<section id="call"><div class="head"><div class="eyebrow2">02 · 실제 호칭</div><h2>재미있는 점: 둘 다 평소에는 “루야”라고 부르게 된다</h2><p>생각보다 이름 두 후보의 일상적인 호칭 차이는 크지 않다.</p></div><div class="quote"><strong>이름이 이루</strong>라면 → “루야!”<br><strong>이름이 이루야</strong>라면 → “루야!”</div><div class="grid two" style="margin-top:16px"><div class="card"><strong>이루</strong><p class="muted">성+이름을 말할 때는 “이루”. 이름만 부를 때는 “루야”.</p></div><div class="card"><strong>이루야</strong><p class="muted">이름 자체가 “루야”이므로 역시 “루야”. <strong>“루야야”라고 부를 필요는 없다.</strong> “루야야~”는 애칭처럼 일부러 부르는 경우에 가깝다.</p></div></div><div class="callout"><strong>실질적인 차이는 호칭보다 ‘전체 이름의 인상’에 있다.</strong> 일상에서는 둘 다 “루야”로 부를 수 있지만, 자기소개·서류·출석처럼 전체 이름이 필요한 상황에서는 “이루”와 “이루야”가 다르게 들린다.</div></section>
+
+<section id="lu"><div class="head"><div class="eyebrow2">03 · ‘루’ 후보</div><h2>이름에 뜻을 담아볼 만한 루 한자</h2><p>앞서 본 인명용 한자 후보 중, 의미를 이름에 연결하기 좋은 글자를 중심으로 정리했다.</p></div><div class="grid two" style="margin-top:20px">
+<div class="card hcard"><div class="hrow"><div class="hanja">慺</div><div><h3>정성스러울 루</h3><div class="sub">정성 · 기쁨</div></div></div><p>“정성스럽다, 기쁘다”라는 뜻. <strong>정성껏 귀하게 자라나는 사람</strong>이라는 의미를 담기 좋다.</p><div class="chips"><span class="chip key">따뜻함</span><span class="chip">가족의 기다림과 연결하기 좋음</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">鏤</div><div><h3>새길 루</h3><div class="sub">새기다 · 아로새기다</div></div></div><p>“새기다, 박아 꾸미다”의 뜻. <strong>소중한 것을 마음에 새기며 살아가는 사람</strong>이라는 의미로 풀기 좋다.</p><div class="chips"><span class="chip key">이야기가 선명함</span><span class="chip">한자는 낯섦</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">熡</div><div><h3>불꽃 루</h3><div class="sub">불꽃</div></div></div><p><strong>빛과 온기, 좋은 열정</strong>의 이미지로 연결할 수 있다.</p><div class="chips"><span class="chip gold">빛의 이미지</span><span class="chip">희귀한 한자</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">壘</div><div><h3>보루 루 / 진 루</h3><div class="sub">보루 · 쌓다</div></div></div><p>성채·보루와 “쌓다”의 이미지. <strong>굳건히 자기 삶을 세워 가는 사람</strong>으로 의미를 잡을 수 있다.</p><div class="chips"><span class="chip key">단단함</span><span class="chip">세워 감</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">婁</div><div><h3>별 이름 루</h3><div class="sub">별 이름 · 끌다</div></div></div><p>별 이름이라는 뜻을 취하면 <strong>별처럼 빛나는 사람</strong>이라는 이미지가 가능하다. 뜻의 방향을 명확히 정해두는 것이 좋다.</p><div class="chips"><span class="chip gold">별 이미지</span><span class="chip">뜻 선택 필요</span></div></div>
+</div><div class="callout"><strong>현재 눈여겨볼 루:</strong> 慺(정성) · 鏤(새김) · 熡(불꽃) · 壘(굳건히 세움) · 婁(별)</div></section>
+
+<section id="ya"><div class="head"><div class="eyebrow2">04 · ‘야’ 후보</div><h2>이름에 뜻을 담아볼 만한 야 한자</h2><p>여기서는 특히 ‘할렐루야’와 연결되는지 여부가 갈린다.</p></div><div class="grid two" style="margin-top:20px">
+<div class="card hcard"><div class="hrow"><div class="hanja">耶</div><div><h3>어조사 야</h3><div class="sub">기독교적 상징성이 있음</div></div></div><p>사전적 뜻은 어조사. 다만 중국어 성경에서 <strong>耶穌(예수), 耶和華(여호와)</strong>처럼 음역에 쓰여 신앙적 연상이 가능하다. <strong>‘耶’ 자체가 ‘하나님’이라는 뜻은 아니다.</strong></p><div class="chips"><span class="chip key">신앙적 상징</span><span class="chip gold">할렐루야와 연결</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">冶</div><div><h3>풀무 야</h3><div class="sub">제련 · 단련 · 빚음</div></div></div><p>풀무·용광로·대장간과 관련된 글자. <strong>다듬고 빚어 가는 삶</strong>이라는 의미를 담기 좋다.</p><div class="chips"><span class="chip key">삶을 빚는 이미지</span><span class="chip">신앙적 뜻은 아님</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">椰</div><div><h3>야자나무 야</h3><div class="sub">야자나무 · 야자</div></div></div><p><strong>생명력 있게 자라는 사람</strong>, 뿌리내리고 크게 자라는 자연의 이미지로 연결할 수 있다.</p><div class="chips"><span class="chip gold">자연 이미지</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">惹</div><div><h3>이끌 야</h3><div class="sub">이끌다 · 끌어당기다</div></div></div><p>사람의 마음을 끌어당기고 이끄는 이미지. 다만 ‘야기(惹起)’ 같은 현대 용례도 함께 생각할 필요가 있다.</p><div class="chips"><span class="chip">이끄는 이미지</span></div></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">野</div><div><h3>들 야</h3><div class="sub">들판 · 자연</div></div></div><p>넓은 들판과 자연의 이미지. 다른 뜻도 있으므로 이름의 취지를 함께 설명하는 편이 좋다.</p></div>
+<div class="card hcard"><div class="hrow"><div class="hanja">夜</div><div><h3>밤 야</h3><div class="sub">밤</div></div></div><p>밤·고요함·밤하늘의 이미지. 다만 <strong>할렐루야와의 직접적인 연결은 약하다.</strong></p></div>
+</div></section>
+
+<section id="combo"><div class="head"><div class="eyebrow2">05 · 조합</div><h2>“루야”로 만들었을 때 생각해볼 한자 조합</h2><p>아래 의미는 두 한자가 하나의 숙어라는 뜻이 아니라, 각 글자의 뜻을 바탕으로 부모가 이름에 담을 수 있는 상징적 해석이다.</p></div><div class="card" style="margin-top:20px">
+<div class="combo"><span class="cname">慺冶</span><small>정성스러울 루 + 풀무 야</small><div><strong>정성껏 빚고 다듬어 가는 사람</strong></div><small>‘정성 + 빚음’의 조합. 삶을 잘 가꾸어 가라는 축복의 의미를 만들기 좋다.</small></div>
+<div class="combo"><span class="cname">鏤冶</span><small>새길 루 + 풀무 야</small><div><strong>소중한 삶을 새기고 다듬어 가는 사람</strong></div><small>‘새김 + 빚음’의 문학적인 이미지.</small></div>
+<div class="combo"><span class="cname">熡冶</span><small>불꽃 루 + 풀무 야</small><div><strong>빛과 열정을 품고 자신을 빚어 가는 사람</strong></div><small>이미지는 강하지만 한자가 매우 희귀하다.</small></div>
+<div class="combo"><span class="cname">壘冶</span><small>보루/쌓을 루 + 풀무 야</small><div><strong>굳건하게 삶을 세워 가는 사람</strong></div><small>단단하고 남성적인 이미지.</small></div>
+<div class="combo"><span class="cname">慺耶</span><small>정성스러울 루 + 어조사 야</small><div><strong>정성스러운 마음으로 신앙을 기억하며 살아가는 사람</strong></div><small>‘耶’의 기독교적 상징성을 활용. 단, 耶 자체를 ‘하나님’이라고 직역하면 정확하지 않다.</small></div>
+<div class="combo"><span class="cname">鏤耶</span><small>새길 루 + 어조사 야</small><div><strong>소중한 은혜를 마음에 새기며 살아가는 사람</strong></div><small>‘새김 + 신앙적 상징’이라는 방향.</small></div>
+<div class="combo"><span class="cname">熡耶</span><small>불꽃 루 + 어조사 야</small><div><strong>하나님 안에서 빛을 내는 사람</strong></div><small>빛과 신앙의 이미지를 겹치는 방향.</small></div>
+<div class="combo"><span class="cname">婁夜</span><small>별 이름 루 + 밤 야</small><div><strong>밤하늘의 별처럼 빛나는 사람</strong></div><small>시적인 방향이지만 할렐루야와의 연결은 약해진다.</small></div>
+</div></section>
+
+<section id="think"><div class="head"><div class="eyebrow2">06 · 같이 고민할 기준</div><h2>아직 하나를 고르지 않아도 된다</h2><p>지금은 ‘정답’을 찾기보다 두 이름의 매력을 분리해서 느껴보는 단계.</p></div>
+<details open><summary>① 우리에게 더 중요한 것은 무엇인가?</summary><div class="db"><strong>이름의 자연스러움과 단정함</strong>을 더 중시하면 ‘이루’가 매력적이고, <strong>할렐루야라는 이야기를 이름 자체에 남기는 것</strong>을 더 중시하면 ‘이루야’가 더 직접적이다.</div></details>
+<details><summary>② 할렐루야는 이름의 ‘유래’인가, 이름의 ‘본체’인가?</summary><div class="db">‘이루’에서는 할렐루야가 이름의 <strong>유래</strong>가 되고, ‘이루다’의 의미가 앞에 나온다. ‘이루야’에서는 <strong>할렐루야 → 루야</strong>가 이름의 중심 이야기가 된다.</div></details>
+<details><summary>③ 한자를 꼭 넣어야 할까?</summary><div class="db">한자를 붙이면 의미의 층을 하나 더 만들 수 있다. 반대로 한글 이름 그대로 두면 <strong>할렐루야에서 가져온 소리와 이야기</strong>가 더 깨끗하게 남는다.</div></details>
+<details><summary>④ 실제 출생신고 전에는 무엇을 확인할까?</summary><div class="db">원하는 한자 각각이 현재 인명용 한자로 등록 가능한지는 대한민국 법원 전자가족관계등록시스템의 공식 조회 화면에서 최종 확인하는 편이 안전하다.</div></details>
+<div class="card" style="margin-top:18px;background:linear-gradient(135deg,#fff,#faf9f5)"><strong>현재 후보판</strong><p style="margin:8px 0 0;color:#555"><strong>이름:</strong> 이루 / 이루야</p><p style="margin:6px 0 0;color:#555"><strong>루:</strong> 慺 · 鏤 · 熡 · 壘 · 婁</p><p style="margin:6px 0 0;color:#555"><strong>야:</strong> 耶 · 冶 · 椰 · 惹 · 野 · 夜</p><p style="margin:12px 0 0;color:#888;font-size:12px">일단 후보를 넓게 잡고, 둘이 실제로 여러 번 소리 내어 불러보면서 마음이 가는 쪽을 좁혀가는 방식.</p></div></section>
+</main>
+<footer class="wrap"><div class="source"><strong>참고</strong><br>인명용 한자 사용 가능 여부는 대한민국 법원 전자가족관계등록시스템의 <a href="https://efamily.scourt.go.kr/cs/CsBltnWrtList.do?bltnbordId=0000010" target="_blank" rel="noopener">인명용 한자 조회</a>와 대법원 인명용 한자표를 최종 기준으로 확인하는 것이 좋다. 대법원은 2024년 6월 11일부터 인명용 한자 1,070자를 추가하여 총 9,389자로 확대 시행했다.</div><div style="margin-top:18px">글꼴: Roboto / Noto Sans KR · 오픈 라이선스 계열 웹폰트 사용</div><div style="margin-top:8px">한자의 사전적 뜻과 이름에 부여하는 상징적 해석은 구분해서 정리했다.</div></footer>
+</body></html>
